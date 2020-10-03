@@ -1,0 +1,17 @@
+SELECT COUNT(*) AS NoOfTransactions,
+CAST(Z.updated_at AS DATE) AS Date,
+CAST(Z.updated_at AS TIME) AS Time
+
+FROM
+campaign L
+INNER JOIN 
+reward_campaign R
+ON L.id = R.campaign_id
+INNER JOIN 
+reward_transaction Z
+ON R.id = Z.reward_campaign_id
+
+WHERE L.status = 'active'
+AND Z.status = 'redeemed'
+
+GROUP BY Z.updated_at

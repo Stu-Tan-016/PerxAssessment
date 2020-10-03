@@ -1,0 +1,10 @@
+{
+    "name": "http_log",
+    "type": "record",
+    "fields": [
+        {"name": "timestamp", "type": "int", "logicalType": "date"},
+        {"name": "http_method", "type": "string"},
+        {"name": "http_path", "type": "string"},
+        {"name": "user_id", "type": "int"}
+    ]
+}
