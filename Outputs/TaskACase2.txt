@@ -1,0 +1,21 @@
+WITH CTE AS (
+  SELECT DISTINCT DATE_PART('week' ,z.updated_at) as 'week', reward_name    
+FROM
+campaign L
+INNER JOIN 
+reward_campaign R
+ON L.id = R.campaign_id
+INNER JOIN 
+reward_transaction Z
+ON R.id = Z.reward_campaign_id
+  GROUP BY 
+  DATE_PART('week' ,z.updated_at), reward_name
+)
+SELECT L.reward_name, L.week
+FROM cte L
+JOIN cte R
+ON L.week = (R.week + 1)
+AND L.reward_name = R.reward_name
+
+GROUP BY 1
+ORDER BY 1
